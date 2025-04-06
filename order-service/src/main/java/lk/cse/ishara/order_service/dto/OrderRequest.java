@@ -1,6 +1,5 @@
 package lk.cse.ishara.order_service.dto;
 
-import lk.cse.ishara.order_service.model.OrderLineItems;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
