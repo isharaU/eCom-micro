@@ -4,11 +4,18 @@ import lk.cse.ishara.order_service.dto.OrderLineItemsDto;
 import lk.cse.ishara.order_service.dto.OrderRequest;
 import lk.cse.ishara.order_service.model.Order;
 import lk.cse.ishara.order_service.model.OrderLineItems;
+import lk.cse.ishara.order_service.repository.OrderRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
+@RequiredArgsConstructor
 public class OrderService {
+    private final OrderRepository orderRepository;
+
     public void placeOrder(OrderRequest orderRequest) {
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
@@ -18,6 +25,7 @@ public class OrderService {
                 .map(this::mapToDto)
                 .toList();
         order.setOrderLineItemsList(orderLineItems);
+        orderRepository.save(order);
     }
 
     private OrderLineItems mapToDto(OrderLineItemsDto orderLineItemsDto) {
